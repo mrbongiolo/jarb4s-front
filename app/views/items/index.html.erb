@@ -1,0 +1,50 @@
+<%- model_class = Item -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:url) %></th>
+      <th><%= model_class.human_attribute_name(:image_url) %></th>
+      <th><%= model_class.human_attribute_name(:quantity) %></th>
+      <th><%= model_class.human_attribute_name(:starting_price_cents) %></th>
+      <th><%= model_class.human_attribute_name(:starting_price_currency) %></th>
+      <th><%= model_class.human_attribute_name(:quality) %></th>
+      <th><%= model_class.human_attribute_name(:rarity) %></th>
+      <th><%= model_class.human_attribute_name(:item_type) %></th>
+      <th><%= model_class.human_attribute_name(:hero) %></th>
+      <th><%= model_class.human_attribute_name(:steam_class_id) %></th>
+      <th><%= model_class.human_attribute_name(:steam_instance_id) %></th>
+      <th><%= model_class.human_attribute_name(:steam_market_hash_name) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= link_to item.id, item_path(item) %></td>
+        <td><%= item.title %></td>
+        <td><%= item.url %></td>
+        <td><%= item.image_url %></td>
+        <td><%= item.quantity %></td>
+        <td><%= item.starting_price_cents %></td>
+        <td><%= item.starting_price_currency %></td>
+        <td><%= item.quality %></td>
+        <td><%= item.rarity %></td>
+        <td><%= item.item_type %></td>
+        <td><%= item.hero %></td>
+        <td><%= item.steam_class_id %></td>
+        <td><%= item.steam_instance_id %></td>
+        <td><%= item.steam_market_hash_name %></td>
+        <td><%=l item.created_at %></td>
+        <td>
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

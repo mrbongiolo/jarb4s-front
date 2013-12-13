@@ -1,0 +1,38 @@
+<%- model_class = Item -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+  <dd><%= @item.title %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:url) %>:</strong></dt>
+  <dd><%= @item.url %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:image_url) %>:</strong></dt>
+  <dd><%= @item.image_url %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:quantity) %>:</strong></dt>
+  <dd><%= @item.quantity %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:starting_price_cents) %>:</strong></dt>
+  <dd><%= @item.starting_price_cents %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:starting_price_currency) %>:</strong></dt>
+  <dd><%= @item.starting_price_currency %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:quality) %>:</strong></dt>
+  <dd><%= @item.quality %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:rarity) %>:</strong></dt>
+  <dd><%= @item.rarity %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:item_type) %>:</strong></dt>
+  <dd><%= @item.item_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:hero) %>:</strong></dt>
+  <dd><%= @item.hero %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:steam_class_id) %>:</strong></dt>
+  <dd><%= @item.steam_class_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:steam_instance_id) %>:</strong></dt>
+  <dd><%= @item.steam_instance_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:steam_market_hash_name) %>:</strong></dt>
+  <dd><%= @item.steam_market_hash_name %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              items_path, :class => 'btn'  %>
+</div>
