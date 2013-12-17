@@ -10,6 +10,7 @@
  *
  *= require_tree .
  *= require theme.bootstrap
+ *= require jquery.tablesorter.pager
  *= require_self
  */
 
