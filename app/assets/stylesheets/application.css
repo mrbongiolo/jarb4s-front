@@ -9,9 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_tree .
- *= require theme.bootstrap
- *= require jquery.tablesorter.pager
  *= require_self
  */
 
 body { padding-top: 40px; }
+
+#filters-form { margin-bottom: 0; }
