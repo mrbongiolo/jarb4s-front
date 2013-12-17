@@ -6,7 +6,12 @@ class ItemsController < ApplicationController
     @item_types = Item.pluck(:item_type).uniq.compact.sort
     @heroes =     Item.pluck(:hero).uniq.compact.sort
 
-    @items = Item.where(quality: params[:quality], rarity: params[:rarity], item_type: params[:item_type], hero: params[:hero]).order('starting_price_cents ASC').page(params[:page])
+    @items = Item.all
+    @items = @items.where(quality: params[:quality]) if params[:quality]
+    @items = @items.where(rarity: params[:rarity]) if params[:rarity]
+    @items = @items.where(item_type: params[:item_type]) if params[:item_type]
+    @items = @items.where(hero: params[:hero]) if params[:hero]
+    @items = @items.order('starting_price_cents ASC').page(params[:page])
   end
 
   def show
