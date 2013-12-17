@@ -1,38 +1,94 @@
 <%- model_class = Item -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:image_url) %></th>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:quantity) %></th>
-      <th><%= model_class.human_attribute_name(:starting_price) %></th>
-      <th><%= model_class.human_attribute_name(:quality) %></th>
-      <th><%= model_class.human_attribute_name(:rarity) %></th>
-      <th><%= model_class.human_attribute_name(:item_type) %></th>
-      <th><%= model_class.human_attribute_name(:hero) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @items.each do |item| %>
+<section>
+  <div class="page-header">
+    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  </div>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= link_to item.id, item_path(item) %></td>
-        <td><%= image_tag item.image_url %></td>
-        <td><%= item.title %></td>
-        <td><%= item.quantity %></td>
-        <td><%= item.starting_price.format(with_currency: true) %></td>
-        <td><%= item.quality %></td>
-        <td><%= item.rarity %></td>
-        <td><%= item.item_type %></td>
-        <td><%= item.hero %></td>
-        <td></td>
+        <th><%= model_class.human_attribute_name(:id) %></th>
+        <th><%= model_class.human_attribute_name(:image_url) %></th>
+        <th><%= model_class.human_attribute_name(:title) %></th>
+        <th><%= model_class.human_attribute_name(:quantity) %></th>
+        <th><%= model_class.human_attribute_name(:starting_price) %></th>
+        <th><%= model_class.human_attribute_name(:quality) %></th>
+        <th><%= model_class.human_attribute_name(:rarity) %></th>
+        <th><%= model_class.human_attribute_name(:item_type) %></th>
+        <th><%= model_class.human_attribute_name(:hero) %></th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= link_to item.id, item_path(item) %></td>
+          <td><%= image_tag item.image_url %></td>
+          <td><%= item.title %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.starting_price.format(with_currency: true) %></td>
+          <td><%= item.quality %></td>
+          <td><%= item.rarity %></td>
+          <td><%= item.item_type %></td>
+          <td><%= item.hero %></td>
+          <td><%= link_to "See on STEAM", item.url %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= paginate @items %>
+  <%= paginate @items %>
+</section>
+
+<script>
+  $(function() {
+
+    $.extend($.tablesorter.themes.bootstrap, {
+      // these classes are added to the table. To see other table classes available,
+      // look here: http://twitter.github.com/bootstrap/base-css.html#tables
+      table      : 'table table-bordered',
+      caption    : 'caption',
+      header     : 'bootstrap-header', // give the header a gradient background
+      footerRow  : '',
+      footerCells: '',
+      icons      : '', // add "icon-white" to make them white; this icon class is added to the <i> in the header
+      sortNone   : 'bootstrap-icon-unsorted',
+      sortAsc    : 'icon-chevron-up glyphicon glyphicon-chevron-up',     // includes classes for Bootstrap v2 & v3
+      sortDesc   : 'icon-chevron-down glyphicon glyphicon-chevron-down', // includes classes for Bootstrap v2 & v3
+      active     : '', // applied when column is sorted
+      hover      : '', // use custom css here - bootstrap class may not override it
+      filterRow  : '', // filter row class
+      even       : '', // odd row zebra striping
+      odd        : ''  // even row zebra striping
+    });
+
+    // call the tablesorter plugin and apply the uitheme widget
+    $("table").tablesorter({
+      // this will apply the bootstrap theme if "uitheme" widget is included
+      // the widgetOptions.uitheme is no longer required to be set
+      theme : "bootstrap",
+
+      widthFixed: true,
+
+      headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
+
+      // widget code contained in the jquery.tablesorter.widgets.js file
+      // use the zebra stripe widget if you plan on hiding any rows (filter widget)
+      widgets : [ "uitheme", "filter", "zebra" ],
+
+      widgetOptions : {
+        // using the default zebra striping class name, so it actually isn't included in the theme variable above
+        // this is ONLY needed for bootstrap theming if you are using the filter widget, because rows are hidden
+        zebra : ["even", "odd"],
+
+        // reset filters button
+        filter_reset : ".reset"
+
+        // set the uitheme widget to use the bootstrap theme class names
+        // this is no longer required, if theme is set
+        // ,uitheme : "bootstrap"
+
+      }
+    });
+
+  });
+</script>
