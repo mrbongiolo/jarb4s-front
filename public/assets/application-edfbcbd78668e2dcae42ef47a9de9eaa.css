@@ -1700,3 +1700,11 @@ a [class^="icon-"],a [class*=" icon-"]{cursor:pointer;}
 body { padding-top: 40px; }
 
 #filters-form { margin-bottom: 0; }
+
+#items-table td {
+  vertical-align: middle;
+}
+
+#items-table img {
+  width: 42px;
+}
